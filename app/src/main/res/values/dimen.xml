@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="outlined_text_field_disabled_active_indicator_opacity">0.38</dimen>
+</resources>
