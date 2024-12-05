@@ -4,9 +4,29 @@
     <string name="app_greeting">Bem vindo ao</string>
     <string name="i_am_student">Sou Aluno</string>
     <string name="i_am_personal_trainer">Sou Personal Trainer</string>
+
+    <!--    Login-->
+    <string name="student">Aluno</string>
+    <string name="personal_trainer">Personal Trainer</string>
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="forgot_my_password">Esqueci minha senha</string>
     <string name="enter">Entrar</string>
     <string name="dont_have_an_account">Não tenho conta</string>
+
+    <!--    Forgot Password-->
+    <string name="forgot_password_title">Recuperar Senha</string>
+    <string name="forgot_password_subtitle">Digite seu email no campo abaixo\npara recuperar a sua senha.</string>
+    <string name="recover">Recuperar</string>
+    <string name="email_sent">Email enviado!</string>
+    <string name="email_message_sent">O email de recuperação de senha foi enviado para: %1$s.\nPor favor, verifique sua caixa de entrada e, caso não encontre, verifique sua caixa de spam.</string>
+    <string name="invalid_email">Email inválido!</string>
+
+    <!--    Sign Up-->
+    <string name="student_signup_message">Atualmente, você não pode criar sua própria conta diretamente no aplicativo. Para criar sua conta, é preciso entrar em contato com o seu personal.</string>
+
+    <string name="greeting">Olá, %1$s</string>
+    <string name="positive_button_option">Ok, entendi</string>
+    <string name="user">Usuário</string>
+    <string name="generic_error_message">No momento estamos com alguns problemas, tente novamente mais tarde por favor.</string>
 </resources>

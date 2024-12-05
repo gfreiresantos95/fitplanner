@@ -1,11 +1,10 @@
-package com.gabrielfreire.fitplanner
+package com.gabrielfreire.fitplanner.views
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.gabrielfreire.fitplanner.Constants
+import com.gabrielfreire.fitplanner.UserType
 import com.gabrielfreire.fitplanner.databinding.ActivityLoginOptionsBinding
 
 class LoginOptionsActivity : AppCompatActivity() {
@@ -17,23 +16,24 @@ class LoginOptionsActivity : AppCompatActivity() {
         loginOptionsBinding = ActivityLoginOptionsBinding.inflate(layoutInflater)
         setContentView(loginOptionsBinding.root)
 
-        setListeners()
+        initViewsAndSetListeners()
     }
 
-    private fun setListeners() {
+    private fun initViewsAndSetListeners() {
         with(loginOptionsBinding) {
             btnStudentLoginOption.setOnClickListener {
-                goToLogin()
+                goToLogin(UserType.STUDENT.type)
             }
 
             btnPersonalTrainerLoginOption.setOnClickListener {
-                goToLogin()
+                goToLogin(UserType.PERSONAL_TRAINER.type)
             }
         }
     }
 
-    private fun goToLogin() {
+    private fun goToLogin(userType: String) {
         val intent = Intent(this@LoginOptionsActivity, LoginActivity::class.java)
+        intent.putExtra(Constants.USER_TYPE, userType)
         startActivity(intent)
     }
 }
