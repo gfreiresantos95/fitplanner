@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:enabled="true"
+        android:icon="@drawable/home_24px"
+        android:title="@string/menu_home_title" />
+
+    <item
+        android:id="@+id/menu_workouts"
+        android:enabled="true"
+        android:icon="@drawable/fitness_center_24px"
+        android:title="@string/menu_workouts_title" />
+
+    <item
+        android:id="@+id/menu_more_options"
+        android:enabled="true"
+        android:icon="@drawable/menu_24px"
+        android:title="@string/menu_more_options_title" />
+</menu>

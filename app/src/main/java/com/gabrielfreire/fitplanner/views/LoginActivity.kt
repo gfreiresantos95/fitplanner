@@ -1,7 +1,6 @@
 package com.gabrielfreire.fitplanner.views
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gabrielfreire.fitplanner.Constants
@@ -21,11 +20,11 @@ class LoginActivity : AppCompatActivity() {
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginBinding.root)
 
-        getuserType()
+        getUserType()
         initViewsAndSetListeners()
     }
 
-    private fun getuserType() {
+    private fun getUserType() {
         userType = if (intent.hasExtra(Constants.USER_TYPE)) {
             intent.getStringExtra(Constants.USER_TYPE).toString()
         } else {
@@ -47,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             btnLoginSignIn.setOnClickListener {
-
+                goToHome()
             }
 
             btnLoginSignUp.setOnClickListener {
@@ -105,10 +104,15 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun goToHome() {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun showStudentSignUpDialog() {
         showOneOptionDialog(
             getString(R.string.greeting, getString(R.string.student)),
-            getString(R.string.student_signup_message),
+            getString(R.string.cannot_create_account_message),
             getString(R.string.positive_button_option)
         )
     }

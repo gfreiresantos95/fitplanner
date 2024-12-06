@@ -5,6 +5,11 @@
     <string name="i_am_personal_trainer">Sou Personal Trainer</string>
     <string name="terms_of_use">Termos de Uso</string>
 
+    <string name="greeting">Olá, %1$s</string>
+    <string name="user">Usuário</string>
+    <string name="generic_error_message">No momento estamos com alguns problemas, tente novamente mais tarde.</string>
+    <string name="positive_button_option">Ok, entendi</string>
+
     <!--    Login-->
     <string name="student">Aluno</string>
     <string name="personal_trainer">Personal Trainer</string>
@@ -24,10 +29,16 @@
     <string name="invalid_email">Email inválido!</string>
 
     <!--    Sign Up-->
-    <string name="student_signup_message">Atualmente, você não pode criar sua própria conta diretamente no aplicativo. Para criar sua conta, é preciso entrar em contato com o seu personal.</string>
+    <string name="cannot_create_account_message">Atualmente, você não pode criar sua própria conta diretamente no aplicativo. Para criar sua conta, é preciso entrar em contato com o seu personal.</string>
 
-    <string name="greeting">Olá, %1$s</string>
-    <string name="positive_button_option">Ok, entendi</string>
-    <string name="user">Usuário</string>
-    <string name="generic_error_message">No momento estamos com alguns problemas, tente novamente mais tarde por favor.</string>
+    <!--    Menu-->
+    <string name="menu_home_title">Início</string>
+    <string name="menu_workouts_title">Treinos</string>
+    <string name="menu_more_options_title">Mais</string>
+    <string name="menu_notifications_title">Notificações</string>
+
+    <!--    Main-->
+    <string name="last_workout_performed">Último treino realizado: %1$s</string>
+    <string name="last_workout_example">Treino A</string>
+
 </resources>
