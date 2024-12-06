@@ -1,6 +1,7 @@
 package com.gabrielfreire.fitplanner.views
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gabrielfreire.fitplanner.Constants
@@ -35,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initViewsAndSetListeners() {
         with(loginBinding) {
             tvLoginUserType.text = getUserTypeText()
+            tvLoginAppVersion.text = getAppVersion()
 
             fabLoginBack.setOnClickListener {
                 finish()
@@ -82,6 +84,20 @@ class LoginActivity : AppCompatActivity() {
         }
 
         return type
+    }
+
+    private fun getAppVersion(): String {
+        var appVersion: String
+
+        try {
+            val packageInfo = packageManager.getPackageInfo(packageName, 0)
+
+            appVersion = packageInfo.versionName ?: getString(R.string.app_version_example)
+        } catch (ex: Exception) {
+            appVersion = getString(R.string.app_version_example)
+        }
+
+        return appVersion
     }
 
     private fun goToForgotPassword() {

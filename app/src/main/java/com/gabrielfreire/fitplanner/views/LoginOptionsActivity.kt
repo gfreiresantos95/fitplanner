@@ -1,6 +1,7 @@
 package com.gabrielfreire.fitplanner.views
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gabrielfreire.fitplanner.Constants
@@ -28,6 +29,10 @@ class LoginOptionsActivity : AppCompatActivity() {
             btnPersonalTrainerLoginOption.setOnClickListener {
                 goToLogin(UserType.PERSONAL_TRAINER.type)
             }
+
+            btnLoginOptionTermsOfUse.setOnClickListener {
+                goToTermsOfUse()
+            }
         }
     }
 
@@ -35,5 +40,10 @@ class LoginOptionsActivity : AppCompatActivity() {
         val intent = Intent(this@LoginOptionsActivity, LoginActivity::class.java)
         intent.putExtra(Constants.USER_TYPE, userType)
         startActivity(intent)
+    }
+
+    private fun goToTermsOfUse() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.TERMS_OF_USE_URL))
+        startActivity(browserIntent)
     }
 }

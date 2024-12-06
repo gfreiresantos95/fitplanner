@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">FitPlanner</string>
     <string name="app_subtitle">Simplificando sua rotina de treinos.</string>
-    <string name="app_greeting">Bem vindo ao</string>
     <string name="i_am_student">Sou Aluno</string>
     <string name="i_am_personal_trainer">Sou Personal Trainer</string>
+    <string name="terms_of_use">Termos de Uso</string>
 
     <!--    Login-->
     <string name="student">Aluno</string>
@@ -13,6 +13,7 @@
     <string name="forgot_my_password">Esqueci minha senha</string>
     <string name="enter">Entrar</string>
     <string name="dont_have_an_account">Não tenho conta</string>
+    <string name="app_version_example">0.0.0</string>
 
     <!--    Forgot Password-->
     <string name="forgot_password_title">Recuperar Senha</string>
