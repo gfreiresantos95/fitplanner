@@ -5,8 +5,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import com.gabrielfreire.fitplanner.R
 import com.gabrielfreire.fitplanner.databinding.ActivityMainBinding
+import com.gabrielfreire.fitplanner.views.fragments.HomeFragment
+import com.gabrielfreire.fitplanner.views.fragments.MoreOptionsFragment
+import com.gabrielfreire.fitplanner.views.fragments.NotificationsFragment
+import com.gabrielfreire.fitplanner.views.fragments.WorkoutsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,21 +26,47 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        replaceFragment(HomeFragment())
+
         with(mainBinding) {
-            tvMainUserName.text = getUserName()
-            tvMainLastWorkoutPerformed.text = getLastWorkout()
+            mtMainToolbar.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.menu_notifications -> {
+                        replaceFragment(NotificationsFragment())
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+
+            bnvMainNavigation.setOnItemSelectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.menu_home -> {
+                        replaceFragment(HomeFragment())
+                        true
+                    }
+
+                    R.id.menu_workouts -> {
+                        replaceFragment(WorkoutsFragment())
+                        true
+                    }
+
+                    R.id.menu_more_options -> {
+                        replaceFragment(MoreOptionsFragment())
+                        true
+                    }
+
+                    else -> false
+                }
+            }
         }
     }
 
-    private fun getUserName(): String {
-        val username = getString(R.string.user)
-
-        return getString(R.string.greeting, username)
-    }
-
-    private fun getLastWorkout(): String {
-        val lastWorkout = getString(R.string.last_workout_example)
-
-        return getString(R.string.last_workout_performed, lastWorkout)
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(mainBinding.flMainContentContainer.id, fragment)
+        fragmentTransaction.commit()
     }
 }

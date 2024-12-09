@@ -1,14 +1,11 @@
 <resources>
+    <!--    Login Option-->
     <string name="app_name">FitPlanner</string>
     <string name="app_subtitle">Simplificando sua rotina de treinos.</string>
     <string name="i_am_student">Sou Aluno</string>
     <string name="i_am_personal_trainer">Sou Personal Trainer</string>
     <string name="terms_of_use">Termos de Uso</string>
-
-    <string name="greeting">Olá, %1$s</string>
-    <string name="user">Usuário</string>
-    <string name="generic_error_message">No momento estamos com alguns problemas, tente novamente mais tarde.</string>
-    <string name="positive_button_option">Ok, entendi</string>
+    <string name="authentication_failed_message">Falha na autenticação.</string>
 
     <!--    Login-->
     <string name="student">Aluno</string>
@@ -19,6 +16,10 @@
     <string name="enter">Entrar</string>
     <string name="dont_have_an_account">Não tenho conta</string>
     <string name="app_version_example">0.0.0</string>
+    <string name="greeting">Olá, %1$s</string>
+    <string name="user">Usuário</string>
+    <string name="generic_error_message">No momento estamos com alguns problemas, tente novamente mais tarde.</string>
+    <string name="positive_button_option">Ok, entendi</string>
 
     <!--    Forgot Password-->
     <string name="forgot_password_title">Recuperar Senha</string>
@@ -38,7 +39,17 @@
     <string name="menu_notifications_title">Notificações</string>
 
     <!--    Main-->
-    <string name="last_workout_performed">Último treino realizado: %1$s</string>
-    <string name="last_workout_example">Treino A</string>
+
+    <!--    Home-->
+    <string name="quote_example">\"A vida é curta para não se aproveitar\" - Luís de Camões</string>
+
+    <!--    Workouts-->
+    <string name="available_workouts">Treinos disponíveis</string>
+
+    <!--    More Options-->
+    <string name="more_options">Mais opções</string>
+
+    <!--    Notifications-->
+    <string name="notifications_received">Notificações recebidas</string>
 
 </resources>
