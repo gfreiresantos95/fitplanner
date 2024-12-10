@@ -16,7 +16,7 @@
         app:elevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow_back_24px"
+        app:srcCompat="@drawable/ic_arrow_back"
         app:tint="@color/md_theme_primary_highContrast" />
 
     <TextView

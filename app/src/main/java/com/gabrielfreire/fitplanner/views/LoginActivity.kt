@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gabrielfreire.fitplanner.Constants
 import com.gabrielfreire.fitplanner.R
-import com.gabrielfreire.fitplanner.UserType
+import com.gabrielfreire.fitplanner.models.UserType
 import com.gabrielfreire.fitplanner.databinding.ActivityLoginBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 

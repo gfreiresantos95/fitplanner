@@ -1,4 +1,4 @@
-package com.gabrielfreire.fitplanner
+package com.gabrielfreire.fitplanner.models
 
 data class Workout(
     val description: String = "",

@@ -1,4 +1,4 @@
-package com.gabrielfreire.fitplanner
+package com.gabrielfreire.fitplanner.models
 
 enum class UserType(val type: String) {
     STUDENT("student"),

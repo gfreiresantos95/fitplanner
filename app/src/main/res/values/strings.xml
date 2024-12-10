@@ -48,7 +48,13 @@
     <string name="available_workouts">Treinos disponíveis</string>
     <string name="workout_title">Título do treino</string>
     <string name="workout_description">Descrição do treino</string>
-    <string name="open_workout">Ver treino</string>
+    <string name="open_workout">Ver Treino</string>
+    <string name="workouts_error_title">Não foi possível carregar seus treinos!</string>
+    <string name="workouts_error_message">Ocorreu um problema ao tentar carregar seus treinos.\nAguarde alguns minutos e tente novamente.</string>
+    <string name="try_again">Tentar Novamente</string>
+    <string name="workouts_empty_title">Nenhum treino disponível no momento.</string>
+    <string name="workouts_empty_message">Seu treinador ainda não cadastrou treinos para você.\nEntre em contato com ele para verificar.</string>
+    <string name="refresh">Atualizar</string>
 
     <!--    More Options-->
     <string name="more_options">Mais opções</string>

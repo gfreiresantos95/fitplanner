@@ -5,7 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gabrielfreire.fitplanner.Constants
-import com.gabrielfreire.fitplanner.UserType
+import com.gabrielfreire.fitplanner.models.UserType
 import com.gabrielfreire.fitplanner.databinding.ActivityLoginOptionsBinding
 
 class LoginOptionsActivity : AppCompatActivity() {

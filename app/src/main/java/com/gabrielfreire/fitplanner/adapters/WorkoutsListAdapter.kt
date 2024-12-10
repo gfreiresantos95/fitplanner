@@ -1,4 +1,4 @@
-package com.gabrielfreire.fitplanner
+package com.gabrielfreire.fitplanner.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.gabrielfreire.fitplanner.R
+import com.gabrielfreire.fitplanner.models.Workout
 
 class WorkoutsListAdapter(
     private val workoutList: ArrayList<Workout>,
