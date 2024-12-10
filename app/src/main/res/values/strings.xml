@@ -44,7 +44,11 @@
     <string name="quote_example">\"A vida é curta para não se aproveitar\" - Luís de Camões</string>
 
     <!--    Workouts-->
+    <string name="loading_available_workouts">Carregando seus treinos...</string>
     <string name="available_workouts">Treinos disponíveis</string>
+    <string name="workout_title">Título do treino</string>
+    <string name="workout_description">Descrição do treino</string>
+    <string name="open_workout">Ver treino</string>
 
     <!--    More Options-->
     <string name="more_options">Mais opções</string>
