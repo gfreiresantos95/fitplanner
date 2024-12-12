@@ -11,11 +11,13 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabrielfreire.fitplanner.R
-import com.gabrielfreire.fitplanner.models.Workout
 import com.gabrielfreire.fitplanner.adapters.WorkoutsListAdapter
 import com.gabrielfreire.fitplanner.databinding.FragmentWorkoutsBinding
 import com.gabrielfreire.fitplanner.models.DatabaseData
 import com.gabrielfreire.fitplanner.models.DatabasePaths
+import com.gabrielfreire.fitplanner.models.UsersWorkouts
+import com.gabrielfreire.fitplanner.models.Workout
+import com.gabrielfreire.fitplanner.models.WorkoutId
 import com.gabrielfreire.fitplanner.models.WorkoutsUiStates
 import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
@@ -28,12 +30,17 @@ class WorkoutsFragment : Fragment() {
     private lateinit var activity: FragmentActivity
 
     private val databaseReference: DatabaseReference = Firebase.database.reference
+    private val workoutsIdsList = arrayListOf<WorkoutId>()
 
     private val workoutsUiState: MutableLiveData<WorkoutsUiStates> by lazy {
         MutableLiveData<WorkoutsUiStates>()
     }
 
-    private val databaseData: MutableLiveData<DatabaseData> by lazy {
+    private val userWorkoutsData: MutableLiveData<DatabaseData> by lazy {
+        MutableLiveData<DatabaseData>()
+    }
+
+    private val workoutsData: MutableLiveData<DatabaseData> by lazy {
         MutableLiveData<DatabaseData>()
     }
 
@@ -55,7 +62,7 @@ class WorkoutsFragment : Fragment() {
         activity = requireActivity()
 
         setObservables()
-        getWorkoutsFromDatabase()
+        getUserWorkoutsFromDatabase()
     }
 
     private fun setObservables() {
@@ -63,14 +70,28 @@ class WorkoutsFragment : Fragment() {
             updateWorkoutsUi()
         }
 
-        databaseData.observe(activity) { data ->
+        userWorkoutsData.observe(activity) { data ->
+            if (data.success != null) {
+                val snapshot = data.success
+
+                if (snapshot?.hasChildren() == true) {
+                    getUserWorkoutsList(snapshot)
+                } else {
+                    workoutsUiState.value = WorkoutsUiStates.EMPTY
+                }
+            } else {
+                workoutsUiState.value = WorkoutsUiStates.ERROR
+            }
+        }
+
+        workoutsData.observe(activity) { data ->
             if (data.success != null) {
                 val snapshot = data.success
 
                 if (snapshot?.hasChildren() == true) {
                     getWorkoutsList(snapshot)
                 } else {
-                    workoutsUiState.value = WorkoutsUiStates.EMPTY
+                    workoutsUiState.value = WorkoutsUiStates.ERROR
                 }
             } else {
                 workoutsUiState.value = WorkoutsUiStates.ERROR
@@ -82,14 +103,14 @@ class WorkoutsFragment : Fragment() {
         }
     }
 
-    private fun getWorkoutsFromDatabase() {
+    private fun getUserWorkoutsFromDatabase() {
         workoutsUiState.value = WorkoutsUiStates.LOADING
 
-        databaseReference.child(DatabasePaths.WORKOUTS.path).get()
+        databaseReference.child(DatabasePaths.USERS_WORKOUTS.path).get()
             .addOnSuccessListener { snapshot ->
-                databaseData.value = DatabaseData(success = snapshot)
+                userWorkoutsData.value = DatabaseData(success = snapshot)
             }.addOnFailureListener { exception ->
-                databaseData.value = DatabaseData(failure = exception)
+                userWorkoutsData.value = DatabaseData(failure = exception)
             }
     }
 
@@ -136,7 +157,7 @@ class WorkoutsFragment : Fragment() {
                     btnWorkoutsErrorAction.text = getString(R.string.refresh)
 
                     btnWorkoutsErrorAction.setOnClickListener {
-                        getWorkoutsFromDatabase()
+                        getUserWorkoutsFromDatabase()
                     }
                 }
             }
@@ -155,8 +176,23 @@ class WorkoutsFragment : Fragment() {
                     btnWorkoutsErrorAction.text = getString(R.string.try_again)
 
                     btnWorkoutsErrorAction.setOnClickListener {
-                        getWorkoutsFromDatabase()
+                        getUserWorkoutsFromDatabase()
                     }
+                }
+            }
+        }
+    }
+
+    private fun getUserWorkoutsList(snapshot: DataSnapshot) {
+        val loggedUserId = "c7745eb1-7db7-4afd-9003-104758b6f32d"
+
+        snapshot.children.forEach { child ->
+            val userWorkoutData = child.getValue(UsersWorkouts::class.java)
+
+            userWorkoutData?.let { data ->
+                if (data.isNotEmpty() && data.activeWorkout && data.userId == loggedUserId) {
+                    workoutsIdsList.addAll(data.workoutsIdsList)
+                    getWorkoutsListFromDatabase()
                 }
             }
         }
@@ -168,9 +204,9 @@ class WorkoutsFragment : Fragment() {
         snapshot.children.forEach { child ->
             val workoutData = child.getValue(Workout::class.java)
 
-            workoutData?.let { workout ->
-                if (workout.isNotEmpty()) {
-                    workouts.add(workout)
+            workoutData?.let { data ->
+                if (data.isNotEmpty() && workoutsIdsList.contains(WorkoutId(data.id))) {
+                    workouts.add(data)
                 }
             }
         }
@@ -178,5 +214,14 @@ class WorkoutsFragment : Fragment() {
         workouts.sortBy { workout -> workout.orderNumber }
 
         workoutsList.value = workouts
+    }
+
+    private fun getWorkoutsListFromDatabase() {
+        databaseReference.child(DatabasePaths.WORKOUTS.path).get()
+            .addOnSuccessListener { snapshot ->
+                workoutsData.value = DatabaseData(success = snapshot)
+            }.addOnFailureListener { exception ->
+                workoutsData.value = DatabaseData(failure = exception)
+            }
     }
 }
