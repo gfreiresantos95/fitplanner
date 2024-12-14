@@ -49,4 +49,9 @@
 
         <item name="android:statusBarColor">@color/md_theme_surface</item>
     </style>
+
+    <style name="Widget.App.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/md_theme_surface</item>
+        <item name="titleTextColor">@android:color/white</item>
+    </style>
 </resources>

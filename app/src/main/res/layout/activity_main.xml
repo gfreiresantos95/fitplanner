@@ -9,6 +9,7 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/mt_main_toolbar"
+        style="@style/Widget.App.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
@@ -28,6 +29,7 @@
         android:id="@+id/bnv_main_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:itemTextColor="@drawable/custom_navigation_item_label_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_navigation_menu" />
 

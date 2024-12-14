@@ -1,10 +1,11 @@
 package com.gabrielfreire.fitplanner.views.fragments
 
+import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -19,6 +20,7 @@ import com.gabrielfreire.fitplanner.models.UsersWorkouts
 import com.gabrielfreire.fitplanner.models.Workout
 import com.gabrielfreire.fitplanner.models.WorkoutId
 import com.gabrielfreire.fitplanner.models.WorkoutsUiStates
+import com.gabrielfreire.fitplanner.views.ExercisesActivity
 import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
@@ -114,6 +116,48 @@ class WorkoutsFragment : Fragment() {
             }
     }
 
+    private fun getUserWorkoutsList(snapshot: DataSnapshot) {
+        val loggedUserId = "c7745eb1-7db7-4afd-9003-104758b6f32d"
+
+        snapshot.children.forEach { child ->
+            val userWorkoutData = child.getValue(UsersWorkouts::class.java)
+
+            userWorkoutData?.let { data ->
+                if (data.isNotEmpty() && data.activeWorkout && data.userId == loggedUserId) {
+                    workoutsIdsList.addAll(data.workoutsIdsList)
+                    getWorkoutsListFromDatabase()
+                }
+            }
+        }
+    }
+
+    private fun getWorkoutsListFromDatabase() {
+        databaseReference.child(DatabasePaths.WORKOUTS.path).get()
+            .addOnSuccessListener { snapshot ->
+                workoutsData.value = DatabaseData(success = snapshot)
+            }.addOnFailureListener { exception ->
+                workoutsData.value = DatabaseData(failure = exception)
+            }
+    }
+
+    private fun getWorkoutsList(snapshot: DataSnapshot) {
+        val workouts = arrayListOf<Workout>()
+
+        snapshot.children.forEach { child ->
+            val workoutData = child.getValue(Workout::class.java)
+
+            workoutData?.let { data ->
+                if (data.isNotEmpty() && workoutsIdsList.contains(WorkoutId(data.id))) {
+                    workouts.add(data)
+                }
+            }
+        }
+
+        workouts.sortBy { workout -> workout.priorityOrder }
+
+        workoutsList.value = workouts
+    }
+
     private fun updateWorkoutsUi() {
         when (workoutsUiState.value?.state) {
             WorkoutsUiStates.LOADING.state -> {
@@ -133,95 +177,52 @@ class WorkoutsFragment : Fragment() {
                     rvWorkoutsList.layoutManager = LinearLayoutManager(activity)
                     rvWorkoutsList.adapter = workoutsList.value?.let { list ->
                         WorkoutsListAdapter(list) {
-                            Toast.makeText(
-                                requireActivity(),
-                                "Ainda não podemos abrir esse treino!",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            val intent = Intent(activity, ExercisesActivity::class.java)
+                            startActivity(intent)
                         }
                     }
                 }
             }
 
             WorkoutsUiStates.EMPTY.state -> {
-                with(workoutsBinding) {
-                    llWorkoutsLoadingContainer.visibility = View.GONE
-                    llWorkoutsListContainer.visibility = View.GONE
-                    llWorkoutsErrorContainer.visibility = View.VISIBLE
+                val icon = ContextCompat.getDrawable(activity, R.drawable.ic_cloud)
+                val title = getString(R.string.workouts_empty_title)
+                val message = getString(R.string.workouts_empty_message)
+                val buttonText = getString(R.string.refresh)
 
-                    ivWorkoutsErrorIcon.setImageDrawable(
-                        ContextCompat.getDrawable(activity, R.drawable.ic_cloud)
-                    )
-                    tvWorkoutsErrorTitle.text = getString(R.string.workouts_empty_title)
-                    tvWorkoutsErrorMessage.text = getString(R.string.workouts_empty_message)
-                    btnWorkoutsErrorAction.text = getString(R.string.refresh)
-
-                    btnWorkoutsErrorAction.setOnClickListener {
-                        getUserWorkoutsFromDatabase()
-                    }
-                }
+                setEmptyOrErrorUi(icon!!, title, message, buttonText)
             }
 
             else -> {
-                with(workoutsBinding) {
-                    llWorkoutsLoadingContainer.visibility = View.GONE
-                    llWorkoutsListContainer.visibility = View.GONE
-                    llWorkoutsErrorContainer.visibility = View.VISIBLE
+                val icon = ContextCompat.getDrawable(activity, R.drawable.ic_error)
+                val title = getString(R.string.workouts_error_title)
+                val message = getString(R.string.workouts_error_message)
+                val buttonText = getString(R.string.try_again)
 
-                    ivWorkoutsErrorIcon.setImageDrawable(
-                        ContextCompat.getDrawable(activity, R.drawable.ic_error)
-                    )
-                    tvWorkoutsErrorTitle.text = getString(R.string.workouts_error_title)
-                    tvWorkoutsErrorMessage.text = getString(R.string.workouts_error_message)
-                    btnWorkoutsErrorAction.text = getString(R.string.try_again)
-
-                    btnWorkoutsErrorAction.setOnClickListener {
-                        getUserWorkoutsFromDatabase()
-                    }
-                }
+                setEmptyOrErrorUi(icon!!, title, message, buttonText)
             }
         }
     }
 
-    private fun getUserWorkoutsList(snapshot: DataSnapshot) {
-        val loggedUserId = "c7745eb1-7db7-4afd-9003-104758b6f32d"
+    private fun setEmptyOrErrorUi(
+        icon: Drawable,
+        title: String,
+        message: String,
+        buttonText: String
+    ) {
+        with(workoutsBinding) {
+            llWorkoutsLoadingContainer.visibility = View.GONE
+            llWorkoutsListContainer.visibility = View.GONE
+            llWorkoutsErrorContainer.visibility = View.VISIBLE
 
-        snapshot.children.forEach { child ->
-            val userWorkoutData = child.getValue(UsersWorkouts::class.java)
+            ivWorkoutsErrorIcon.setImageDrawable(icon)
+            tvWorkoutsErrorTitle.text = title
+            tvWorkoutsErrorMessage.text = message
+            btnWorkoutsErrorAction.text = buttonText
 
-            userWorkoutData?.let { data ->
-                if (data.isNotEmpty() && data.activeWorkout && data.userId == loggedUserId) {
-                    workoutsIdsList.addAll(data.workoutsIdsList)
-                    getWorkoutsListFromDatabase()
-                }
+            btnWorkoutsErrorAction.setOnClickListener {
+                getUserWorkoutsFromDatabase()
             }
         }
-    }
-
-    private fun getWorkoutsList(snapshot: DataSnapshot) {
-        val workouts = arrayListOf<Workout>()
-
-        snapshot.children.forEach { child ->
-            val workoutData = child.getValue(Workout::class.java)
-
-            workoutData?.let { data ->
-                if (data.isNotEmpty() && workoutsIdsList.contains(WorkoutId(data.id))) {
-                    workouts.add(data)
-                }
-            }
-        }
-
-        workouts.sortBy { workout -> workout.orderNumber }
-
-        workoutsList.value = workouts
-    }
-
-    private fun getWorkoutsListFromDatabase() {
-        databaseReference.child(DatabasePaths.WORKOUTS.path).get()
-            .addOnSuccessListener { snapshot ->
-                workoutsData.value = DatabaseData(success = snapshot)
-            }.addOnFailureListener { exception ->
-                workoutsData.value = DatabaseData(failure = exception)
-            }
     }
 }

@@ -18,6 +18,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/greeting"
             android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textColor="@color/md_theme_primary_highContrast"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,6 +30,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/quote_example"
             android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="@color/md_theme_primary_highContrast"
             app:layout_constraintTop_toBottomOf="@id/tv_home_username" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

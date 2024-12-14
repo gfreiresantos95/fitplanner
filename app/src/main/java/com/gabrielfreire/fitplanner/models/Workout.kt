@@ -5,7 +5,7 @@ data class Workout(
     val exerciseListId: String = "",
     val id: String = "",
     val title: String = "",
-    val orderNumber: Int = 0
+    val priorityOrder: Int = 0
 ) {
 
     fun isNotEmpty(): Boolean {

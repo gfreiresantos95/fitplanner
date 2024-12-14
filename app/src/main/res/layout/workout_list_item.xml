@@ -17,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/workout_title"
-            android:textAppearance="?attr/textAppearanceTitleMedium" />
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="@color/md_theme_primary_highContrast" />
 
         <TextView
             android:id="@+id/tv_workout_description"
@@ -25,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/workout_description"
-            android:textAppearance="?attr/textAppearanceBodySmall" />
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="@color/md_theme_primary_highContrast" />
 
         <Button
             android:id="@+id/btn_open_workout"

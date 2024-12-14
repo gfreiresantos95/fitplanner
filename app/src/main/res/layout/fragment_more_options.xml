@@ -18,6 +18,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/more_options"
             android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textColor="@color/md_theme_primary_highContrast"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
