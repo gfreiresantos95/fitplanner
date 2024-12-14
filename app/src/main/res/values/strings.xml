@@ -62,4 +62,14 @@
     <!--    Notifications-->
     <string name="notifications_received">Notificações recebidas</string>
 
+    <!--    Exercises-->
+    <string name="loading_exercises">Carregando os exercícios...</string>
+    <string name="exercises_view_mode_message">Você está em modo de visualização.\nPara começar, clique no botão Iniciar abaixo.</string>
+    <string name="init_workout">Iniciar</string>
+    <string name="exercise_title">Título do exercício</string>
+    <string name="exercise_series_number">Séries: %1$sx %2$s</string>
+    <string name="exercise_weight">Carga: %1$s</string>
+    <string name="exercise_interval">Intervalo</string>
+    <string name="exercise_edit_weight">Editar Carga</string>
+
 </resources>

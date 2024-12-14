@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gabrielfreire.fitplanner.Constants
 import com.gabrielfreire.fitplanner.R
 import com.gabrielfreire.fitplanner.adapters.WorkoutsListAdapter
 import com.gabrielfreire.fitplanner.databinding.FragmentWorkoutsBinding
@@ -19,12 +20,13 @@ import com.gabrielfreire.fitplanner.models.DatabasePaths
 import com.gabrielfreire.fitplanner.models.UsersWorkouts
 import com.gabrielfreire.fitplanner.models.Workout
 import com.gabrielfreire.fitplanner.models.WorkoutId
-import com.gabrielfreire.fitplanner.models.WorkoutsUiStates
+import com.gabrielfreire.fitplanner.models.UiStates
 import com.gabrielfreire.fitplanner.views.ExercisesActivity
 import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.database
+import com.google.gson.Gson
 
 class WorkoutsFragment : Fragment() {
 
@@ -34,8 +36,8 @@ class WorkoutsFragment : Fragment() {
     private val databaseReference: DatabaseReference = Firebase.database.reference
     private val workoutsIdsList = arrayListOf<WorkoutId>()
 
-    private val workoutsUiState: MutableLiveData<WorkoutsUiStates> by lazy {
-        MutableLiveData<WorkoutsUiStates>()
+    private val workoutsUiState: MutableLiveData<UiStates> by lazy {
+        MutableLiveData<UiStates>()
     }
 
     private val userWorkoutsData: MutableLiveData<DatabaseData> by lazy {
@@ -79,10 +81,10 @@ class WorkoutsFragment : Fragment() {
                 if (snapshot?.hasChildren() == true) {
                     getUserWorkoutsList(snapshot)
                 } else {
-                    workoutsUiState.value = WorkoutsUiStates.EMPTY
+                    workoutsUiState.value = UiStates.EMPTY
                 }
             } else {
-                workoutsUiState.value = WorkoutsUiStates.ERROR
+                workoutsUiState.value = UiStates.ERROR
             }
         }
 
@@ -93,20 +95,20 @@ class WorkoutsFragment : Fragment() {
                 if (snapshot?.hasChildren() == true) {
                     getWorkoutsList(snapshot)
                 } else {
-                    workoutsUiState.value = WorkoutsUiStates.ERROR
+                    workoutsUiState.value = UiStates.ERROR
                 }
             } else {
-                workoutsUiState.value = WorkoutsUiStates.ERROR
+                workoutsUiState.value = UiStates.ERROR
             }
         }
 
         workoutsList.observe(activity) {
-            workoutsUiState.value = WorkoutsUiStates.LOADED
+            workoutsUiState.value = UiStates.LOADED
         }
     }
 
     private fun getUserWorkoutsFromDatabase() {
-        workoutsUiState.value = WorkoutsUiStates.LOADING
+        workoutsUiState.value = UiStates.LOADING
 
         databaseReference.child(DatabasePaths.USERS_WORKOUTS.path).get()
             .addOnSuccessListener { snapshot ->
@@ -160,7 +162,7 @@ class WorkoutsFragment : Fragment() {
 
     private fun updateWorkoutsUi() {
         when (workoutsUiState.value?.state) {
-            WorkoutsUiStates.LOADING.state -> {
+            UiStates.LOADING.state -> {
                 with(workoutsBinding) {
                     llWorkoutsListContainer.visibility = View.GONE
                     llWorkoutsErrorContainer.visibility = View.GONE
@@ -168,7 +170,7 @@ class WorkoutsFragment : Fragment() {
                 }
             }
 
-            WorkoutsUiStates.LOADED.state -> {
+            UiStates.LOADED.state -> {
                 with(workoutsBinding) {
                     llWorkoutsLoadingContainer.visibility = View.GONE
                     llWorkoutsErrorContainer.visibility = View.GONE
@@ -176,15 +178,19 @@ class WorkoutsFragment : Fragment() {
 
                     rvWorkoutsList.layoutManager = LinearLayoutManager(activity)
                     rvWorkoutsList.adapter = workoutsList.value?.let { list ->
-                        WorkoutsListAdapter(list) {
+                        WorkoutsListAdapter(list) { workout ->
                             val intent = Intent(activity, ExercisesActivity::class.java)
+                            val workoutJson = Gson().toJson(workout)
+
+                            intent.putExtra(Constants.WORKOUT_KEY, workoutJson)
+
                             startActivity(intent)
                         }
                     }
                 }
             }
 
-            WorkoutsUiStates.EMPTY.state -> {
+            UiStates.EMPTY.state -> {
                 val icon = ContextCompat.getDrawable(activity, R.drawable.ic_cloud)
                 val title = getString(R.string.workouts_empty_title)
                 val message = getString(R.string.workouts_empty_message)

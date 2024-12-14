@@ -1,6 +1,6 @@
 package com.gabrielfreire.fitplanner.models
 
-enum class WorkoutsUiStates(val state: String) {
+enum class UiStates(val state: String) {
     EMPTY("empty"),
     ERROR("error"),
     LOADED("loaded"),

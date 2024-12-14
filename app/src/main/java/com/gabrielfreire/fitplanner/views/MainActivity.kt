@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
 
-        initViews()
+        initViewsAndSetListeners()
     }
 
-    private fun initViews() {
+    private fun initViewsAndSetListeners() {
         replaceFragment(HomeFragment())
 
         with(mainBinding) {
