@@ -5,7 +5,6 @@
     <string name="i_am_student">Sou Aluno</string>
     <string name="i_am_personal_trainer">Sou Personal Trainer</string>
     <string name="terms_of_use">Termos de Uso</string>
-    <string name="authentication_failed_message">Falha na autenticação.</string>
 
     <!--    Login-->
     <string name="student">Aluno</string>
@@ -21,6 +20,16 @@
     <string name="generic_error_message">No momento estamos com alguns problemas, tente novamente mais tarde.</string>
     <string name="positive_button_option">Ok, entendi</string>
 
+    <!--    Sign Up-->
+    <string name="cannot_create_account_message">Atualmente, você não pode criar sua própria conta diretamente no aplicativo. Para criar sua conta, é preciso entrar em contato com o seu personal.</string>
+    <string name="sign_up_title">Criar Conta</string>
+    <string name="sign_up_subtitle">Preencha as informações abaixo para criar a sua conta.</string>
+    <string name="full_name">Nome Completo</string>
+    <string name="cellphone">Celular</string>
+    <string name="birthdate">Data de Nascimento</string>
+    <string name="password_confirmation">Confirme a Senha</string>
+    <string name="register">Cadastrar</string>
+
     <!--    Forgot Password-->
     <string name="forgot_password_title">Recuperar Senha</string>
     <string name="forgot_password_subtitle">Digite seu email no campo abaixo\npara recuperar a sua senha.</string>
@@ -28,9 +37,6 @@
     <string name="email_sent">Email enviado!</string>
     <string name="email_message_sent">O email de recuperação de senha foi enviado para: %1$s.\nPor favor, verifique sua caixa de entrada e, caso não encontre, verifique sua caixa de spam.</string>
     <string name="invalid_email">Email inválido!</string>
-
-    <!--    Sign Up-->
-    <string name="cannot_create_account_message">Atualmente, você não pode criar sua própria conta diretamente no aplicativo. Para criar sua conta, é preciso entrar em contato com o seu personal.</string>
 
     <!--    Menu-->
     <string name="menu_home_title">Início</string>
@@ -64,7 +70,7 @@
 
     <!--    Exercises-->
     <string name="loading_exercises">Carregando os exercícios...</string>
-    <string name="exercises_view_mode_message">Você está em modo de visualização.\nPara começar, clique no botão Iniciar abaixo.</string>
+    <string name="exercises_view_mode_message">Você está em modo de visualização.\nPara começar, clique no botão abaixo.</string>
     <string name="init_workout">Iniciar</string>
     <string name="exercise_title">Título do exercício</string>
     <string name="exercise_series_number">Séries: %1$sx %2$s</string>

@@ -3,6 +3,7 @@ package com.gabrielfreire.fitplanner.views
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import com.gabrielfreire.fitplanner.Constants
 import com.gabrielfreire.fitplanner.R
 import com.gabrielfreire.fitplanner.models.UserType
@@ -13,19 +14,28 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginBinding: ActivityLoginBinding
 
-    private var userType: String = ""
+    private val userType: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginBinding.root)
 
+        setObservables()
         getUserType()
         initViewsAndSetListeners()
     }
 
+    private fun setObservables() {
+        userType.observe(this@LoginActivity) {
+            setUserTypeTextAndSignUpAction()
+        }
+    }
+
     private fun getUserType() {
-        userType = if (intent.hasExtra(Constants.USER_TYPE)) {
+        userType.value = if (intent.hasExtra(Constants.USER_TYPE)) {
             intent.getStringExtra(Constants.USER_TYPE).toString()
         } else {
             ""
@@ -34,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initViewsAndSetListeners() {
         with(loginBinding) {
-            tvLoginUserType.text = getUserTypeText()
             tvLoginAppVersion.text = getAppVersion()
 
             fabLoginBack.setOnClickListener {
@@ -48,41 +57,32 @@ class LoginActivity : AppCompatActivity() {
             btnLoginSignIn.setOnClickListener {
                 goToHome()
             }
-
-            btnLoginSignUp.setOnClickListener {
-                when (userType) {
-                    UserType.STUDENT.type -> {
-                        showStudentSignUpDialog()
-                    }
-
-                    UserType.PERSONAL_TRAINER.type -> {
-
-                    }
-
-                    else -> {
-                        showGenericErrorDialog()
-                    }
-                }
-            }
         }
     }
 
-    private fun getUserTypeText(): String {
-        val type = when (userType) {
+    private fun setUserTypeTextAndSignUpAction() {
+        when (userType.value) {
             UserType.STUDENT.type -> {
-                getString(R.string.student)
+                loginBinding.tvLoginUserType.text = getString(R.string.student)
+                loginBinding.btnLoginSignUp.setOnClickListener {
+                    showStudentSignUpDialog()
+                }
             }
 
             UserType.PERSONAL_TRAINER.type -> {
-                getString(R.string.personal_trainer)
+                loginBinding.tvLoginUserType.text = getString(R.string.personal_trainer)
+                loginBinding.btnLoginSignUp.setOnClickListener {
+                    goToSignUp()
+                }
             }
 
             else -> {
-                getString(R.string.user)
+                loginBinding.tvLoginUserType.text = getString(R.string.user)
+                loginBinding.btnLoginSignUp.setOnClickListener {
+                    showGenericErrorDialog()
+                }
             }
         }
-
-        return type
     }
 
     private fun getAppVersion(): String {
@@ -106,6 +106,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToHome() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goToSignUp() {
+        val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
         startActivity(intent)
     }
 

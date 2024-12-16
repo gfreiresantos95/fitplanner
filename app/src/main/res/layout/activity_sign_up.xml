@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_sign_up"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.SignUpActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_sign_up_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/md_theme_surface"
+        app:elevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back"
+        app:tint="@color/md_theme_primary_highContrast" />
+
+    <TextView
+        android:id="@+id/tv_sign_up_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/sign_up_title"
+        android:textAlignment="center"
+        android:textAppearance="?attr/textAppearanceHeadlineLarge"
+        android:textColor="@color/md_theme_primary_highContrast"
+        app:layout_constraintBottom_toTopOf="@id/tv_sign_up_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_sign_up_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/sign_up_subtitle"
+        android:textAlignment="center"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textColor="@color/md_theme_primary_highContrast"
+        app:layout_constraintBottom_toTopOf="@id/ll_sign_up_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_sign_up_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_full_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/full_name"
+            android:textColorHint="@color/md_theme_outline_highContrast"
+            app:boxStrokeColor="@drawable/custom_text_field_stroke_color"
+            app:endIconDrawable="@drawable/ic_person"
+            app:endIconMode="custom">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_sign_up_full_name_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:maxWidth="488dp"
+                android:minWidth="348dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/email"
+            android:textColorHint="@color/md_theme_outline_highContrast"
+            app:boxStrokeColor="@drawable/custom_text_field_stroke_color"
+            app:endIconDrawable="@drawable/ic_alternate_email"
+            app:endIconMode="custom">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_sign_up_email_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress"
+                android:maxWidth="488dp"
+                android:minWidth="348dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_cellphone_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/cellphone"
+            android:textColorHint="@color/md_theme_outline_highContrast"
+            app:boxStrokeColor="@drawable/custom_text_field_stroke_color"
+            app:endIconDrawable="@drawable/ic_call"
+            app:endIconMode="custom">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_sign_up_cellphone_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxWidth="488dp"
+                android:maxLength="14"
+                android:minWidth="348dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_birthdate_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/birthdate"
+            android:textColorHint="@color/md_theme_outline_highContrast"
+            app:boxStrokeColor="@drawable/custom_text_field_stroke_color"
+            app:endIconDrawable="@drawable/ic_calendar_today"
+            app:endIconMode="custom">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_sign_up_birthdate_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxWidth="488dp"
+                android:maxLength="10"
+                android:minWidth="348dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_password_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/password"
+            android:textColorHint="@color/md_theme_outline_highContrast"
+            app:boxStrokeColor="@drawable/custom_text_field_stroke_color"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_sign_up_password_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxWidth="488dp"
+                android:minWidth="348dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_password_confirmation_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/password_confirmation"
+            android:textColorHint="@color/md_theme_outline_highContrast"
+            app:boxStrokeColor="@drawable/custom_text_field_stroke_color"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_sign_up_password_confirmation_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxWidth="488dp"
+                android:minWidth="348dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_sign_up_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:maxWidth="320dp"
+        android:minWidth="256dp"
+        android:text="@string/register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_sign_up_container" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

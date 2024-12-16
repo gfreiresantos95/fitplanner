@@ -49,11 +49,12 @@
 
     <LinearLayout
         android:id="@+id/ll_login_container"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +64,9 @@
             android:layout_marginBottom="2dp"
             android:hint="@string/email"
             android:textColorHint="@color/md_theme_outline_highContrast"
-            app:boxStrokeColor="@drawable/custom_text_field_stroke_color">
+            app:boxStrokeColor="@drawable/custom_text_field_stroke_color"
+            app:endIconDrawable="@drawable/ic_alternate_email"
+            app:endIconMode="custom">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tiet_login_email_input"
