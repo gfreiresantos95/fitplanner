@@ -64,6 +64,7 @@ class LoginActivity : AppCompatActivity() {
         when (userType.value) {
             UserType.STUDENT.type -> {
                 loginBinding.tvLoginUserType.text = getString(R.string.student)
+
                 loginBinding.btnLoginSignUp.setOnClickListener {
                     showStudentSignUpDialog()
                 }
@@ -71,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
 
             UserType.PERSONAL_TRAINER.type -> {
                 loginBinding.tvLoginUserType.text = getString(R.string.personal_trainer)
+
                 loginBinding.btnLoginSignUp.setOnClickListener {
                     goToSignUp()
                 }
@@ -78,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
 
             else -> {
                 loginBinding.tvLoginUserType.text = getString(R.string.user)
+
                 loginBinding.btnLoginSignUp.setOnClickListener {
                     showGenericErrorDialog()
                 }
@@ -101,16 +104,19 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToForgotPassword() {
         val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
+
         startActivity(intent)
     }
 
     private fun goToHome() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
+
         startActivity(intent)
     }
 
     private fun goToSignUp() {
         val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+
         startActivity(intent)
     }
 

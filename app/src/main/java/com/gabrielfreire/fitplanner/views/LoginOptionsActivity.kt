@@ -38,12 +38,15 @@ class LoginOptionsActivity : AppCompatActivity() {
 
     private fun goToLogin(userType: String) {
         val intent = Intent(this@LoginOptionsActivity, LoginActivity::class.java)
+
         intent.putExtra(Constants.USER_TYPE, userType)
+
         startActivity(intent)
     }
 
     private fun goToTermsOfUse() {
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.TERMS_OF_USE_URL))
+
         startActivity(browserIntent)
     }
 }
