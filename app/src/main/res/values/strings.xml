@@ -37,6 +37,7 @@
     <string name="email_sent">Email enviado!</string>
     <string name="email_message_sent">O email de recuperação de senha foi enviado para: %1$s.\nPor favor, verifique sua caixa de entrada e, caso não encontre, verifique sua caixa de spam.</string>
     <string name="invalid_email">Email inválido!</string>
+    <string name="generic_error_title">Atenção</string>
 
     <!--    Menu-->
     <string name="menu_home_title">Início</string>

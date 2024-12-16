@@ -1,12 +1,8 @@
 package com.gabrielfreire.fitplanner.views
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.gabrielfreire.fitplanner.Constants
-import com.gabrielfreire.fitplanner.R
 import com.gabrielfreire.fitplanner.databinding.ActivityExercisesBinding
 import com.gabrielfreire.fitplanner.models.Workout
 import com.google.gson.Gson
