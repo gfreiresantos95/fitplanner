@@ -7,6 +7,7 @@
     <string name="terms_of_use">Termos de Uso</string>
 
     <!--    Login-->
+    <string name="return_to_previous_screen_content_description">Voltar para a tela anterior</string>
     <string name="student">Aluno</string>
     <string name="personal_trainer">Personal Trainer</string>
     <string name="email">Email</string>
@@ -56,9 +57,11 @@
     <string name="workout_title">Título do treino</string>
     <string name="workout_description">Descrição do treino</string>
     <string name="open_workout">Ver Treino</string>
+    <string name="error_loading_workouts_content_description">Erro ao carregar os treinos.</string>
     <string name="workouts_error_title">Não foi possível carregar seus treinos!</string>
     <string name="workouts_error_message">Ocorreu um problema ao tentar carregar seus treinos.\nAguarde alguns minutos e tente novamente.</string>
     <string name="try_again">Tentar Novamente</string>
+    <string name="no_workouts_found_content_description">Nenhum treino encontrado.</string>
     <string name="workouts_empty_title">Nenhum treino disponível no momento.</string>
     <string name="workouts_empty_message">Seu treinador ainda não cadastrou treinos para você.\nEntre em contato com ele para verificar.</string>
     <string name="refresh">Atualizar</string>

@@ -86,6 +86,7 @@
                 android:id="@+id/iv_workouts_error_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/error_loading_workouts_content_description"
                 android:minWidth="48dp"
                 android:minHeight="48dp"
                 android:scaleType="centerCrop"

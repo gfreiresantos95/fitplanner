@@ -7,14 +7,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gabrielfreire.fitplanner.R
-import com.gabrielfreire.fitplanner.models.Workout
+import com.gabrielfreire.fitplanner.models.WorkoutPlan
 
-class WorkoutsListAdapter(
-    private val workoutList: ArrayList<Workout>,
-    private val openWorkoutButtonClickEvent: (Workout) -> Unit
-) : RecyclerView.Adapter<WorkoutsListAdapter.WorkoutListViewHolder>() {
+class WorkoutPlansListAdapter(
+    private val workoutPlansList: ArrayList<WorkoutPlan>,
+    private val openWorkoutPlanButtonClickEvent: (WorkoutPlan) -> Unit
+) : RecyclerView.Adapter<WorkoutPlansListAdapter.WorkoutListViewHolder>() {
 
-    class WorkoutListViewHolder(view: View, openWorkoutButtonClickEvent: (Int) -> Unit) :
+    class WorkoutListViewHolder(view: View, openWorkoutPlanButtonClickEvent: (Int) -> Unit) :
         RecyclerView.ViewHolder(view) {
 
         private val tvWorkoutTitle: TextView = view.findViewById(R.id.tv_workout_title)
@@ -24,13 +24,13 @@ class WorkoutsListAdapter(
 
         init {
             btnOpenTraining.setOnClickListener {
-                openWorkoutButtonClickEvent(adapterPosition)
+                openWorkoutPlanButtonClickEvent(adapterPosition)
             }
         }
 
-        fun bind(workout: Workout) {
-            tvWorkoutTitle.text = workout.title
-            tvWorkoutDescription.text = workout.description
+        fun bind(workoutPlan: WorkoutPlan) {
+            tvWorkoutTitle.text = workoutPlan.title
+            tvWorkoutDescription.text = workoutPlan.description
         }
     }
 
@@ -39,12 +39,12 @@ class WorkoutsListAdapter(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.workout_list_item, parent, false)
         ) { index ->
-            openWorkoutButtonClickEvent(workoutList[index])
+            openWorkoutPlanButtonClickEvent(workoutPlansList[index])
         }
 
-    override fun getItemCount(): Int = workoutList.size
+    override fun getItemCount(): Int = workoutPlansList.size
 
     override fun onBindViewHolder(holder: WorkoutListViewHolder, position: Int) {
-        holder.bind(workoutList[position])
+        holder.bind(workoutPlansList[position])
     }
 }
